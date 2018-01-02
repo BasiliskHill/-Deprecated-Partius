@@ -1,0 +1,24 @@
+{
+  "name": "partius",
+  "version": "1.0.0",
+  "description": "Partius bot",
+  "main": "bot.js",
+  "dependencies": {
+    "eris": "github:abalabahaha/eris#dev",
+    "pubg.js": "^2.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BasiliskHill/Partius.git"
+  },
+  "author": "BasiliskHill",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BasiliskHill/Partius/issues"
+  },
+  "homepage": "https://github.com/BasiliskHill/Partius#readme"
+}
