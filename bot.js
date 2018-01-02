@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 const Eris = require("eris");
 var config = require("./Partius.json")
 var shortUrl = require("node-url-shortener");
@@ -201,4 +200,3 @@ bot.on("ready", () => {
 bot.registerCommand("ping", "pong", {});
 
 bot.connect();
->>>>>>> 6b3498fd4fddaa43aea63fe25e89e20e80bc0525
