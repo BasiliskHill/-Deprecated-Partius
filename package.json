@@ -5,6 +5,7 @@
   "main": "bot.js",
   "dependencies": {
     "eris": "github:abalabahaha/eris#dev",
+    "node-url-shortener": "^1.0.1",
     "pubg.js": "^2.0.0"
   },
   "devDependencies": {},
