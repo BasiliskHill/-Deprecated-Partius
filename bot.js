@@ -99,7 +99,6 @@ var info = bot.registerCommand("info", (msg, args) => {
 	}
 	userInfo(msg, msg.mentions[0]);
 }, {
-	aliases: ["information", "in", "mi"],
 	usage: "<@user>",
 	guildOnly: true,
 	description: "WIP User information sender.",
@@ -112,6 +111,25 @@ var ping = bot.registerCommand("ping", ["Pang!", "Peng!", "Pong!", "Pung!"], {
 	fullDescription: "A command to check if the bot is up, or for entertainment... Weirdos."
 })
 //Functions used
+function timeStamp() {
+	 var now = new Date();
+
+	 var date = [now.getMonth() + 1, now.getDate(), now.getFullYear()];
+
+	 var time = [now.getHours(), now.getMinutes()];
+
+	 var suffix = (time[0] < 12) ? "AM" : "PM";
+
+	 time[0] = (time[0] <= 12) ? time[0] : time[0] - 12;
+
+	 for (var i = 1; i < 3; i++) {
+		 if (time[i] < 10) {
+			 time[i] = "0" + time[i];
+		 }
+	 }
+
+	 return date.join("/") + " " + time.join(":") + " " + suffix;
+}
 
 function footer(msg) {
 	return "Requested by " + msg.author.username;
@@ -131,7 +149,7 @@ async function userInfo(msg, user) {
 	shortUrl.short(user.dynamicAvatarURL("png", 1024), function(err, url){
 		msg.channel.createMessage({
 			embed: {
-				description: `**This embed displays all information I have on ${user.username}**`,
+				description: "__**General Information:**__",
 				timestamp: date.toISOString(),
 				color: 0xd50000,
 				footer: {
@@ -146,10 +164,6 @@ async function userInfo(msg, user) {
 					icon_url: user.avatarURL
 				},
 				fields: [
-					{
-						name: "__**General Information:**__",
-						value: "<-=->(+)<-=->"
-					},
 					{
 						name: "Username:",
 						value: user.username,
