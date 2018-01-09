@@ -1,53 +1,34 @@
 const Eris = require("eris");
 var config = require("./Partius.json")
 var shortUrl = require("node-url-shortener");
-var purgeJS = require("./commands/purge.js");
+var fs = require("fs");
 
 var bot = new Eris.CommandClient(config.token, {}, config.commandOptions);
 
 bot.on("ready", () => {
-    console.log("ONLINE!");
+    console.log("\nREADY!");
 		console.log("Current prefix: " + bot.commandOptions.prefix);
 		bot.editStatus("online", {
-			name: "/prt help"
+			name: `${bot.commandOptions.prefix}help`
 		});
 });
 //Command list
-purge = purgeJS.register(bot, functions);
+fs.readdir("./commands", (err,files) => {
+	if (err != null) {
+		console.log(err.stack);
+	} else {
+		for (var file in files) {
+			var command = require(`./commands/${files[file]}`);
+			command.register(bot, functions);
 
-/*var purgeAll = purge.registerSubcommand("all", async (msg, args) => {
-	var messagesKilled = 0;
-
-	for (channel of msg.channel.guild.channels.values()) {
-		if (channel.type === 0) {
-			messagesKilled += await bot.purgeChannel(channel.id, -1);
+			console.log(`Command '${files[file].slice(0, -3)}' has been loaded.`);
 		}
-	}
-
-	//Discord logging
-	var embedLog = await msg.channel.createMessage({
-		embed: {
-			title: "Purge ALL completed.",
-			description:"Deleted a total of " + (messagesKilled - 1) + " message(s) from the server.",
-			color: 0xd50000,
-			footer: {
-				icon_url: msg.author.avatarURL,
-				text: footer(msg)
-			}
-		}
-	});
-	serverLog(msg, embedLog);
-
-}, {
-	guildOnly: true,
-	description: "Purge a whole server",
-	fullDescription: "Purges all messages < 2 weeks old from **all** channels on the server",
-	cooldown: 60000,
-	requirements: {
-    userIDs: message => [message.channel.guild.ownerID]
 	}
 });
-*/
+/*var purge = purgeJS.register(bot, functions);
+
+var purgeAll =*/
+
 var info = bot.registerCommand("info", (msg, args) => {
 	if (msg.mentions.length === 0) { //If no one is mentioned, send the author's info
 		return userInfo(msg, msg.author);
@@ -62,27 +43,30 @@ var info = bot.registerCommand("info", (msg, args) => {
 })
 
 var ping = bot.registerCommand("ping", ["Pang!", "Peng!", "Pong!", "Pung!"], {
-	//Responds with random versions of "Ping!" when someone says "/prt pong"
+	//Responds with random versions of "Ping!" when someone says "/pt pong"
 	description: "Pong!",
 	fullDescription: "A command to check if the bot is up, or for entertainment... Weirdos."
 })
-//Functions used
 
+//Functions used
 var functions = {
 	serverLog: {
 		noNotify: function (msg, embedLog, bot) {
 			bot.createMessage("390789909902000129", {
-				content: `${msg.command.label} completed in: ${msg.channel.guild.name}`,
+				content: `Completed in: ${msg.channel.guild.name}`,
 				embed: embedLog.embeds[0]
 			});
 		},
 		notify: function (msg, embedLog, bot) {
 			bot.createMessage("390790193231167488", {
-				content: `${msg.command.label} completed in: ${msg.channel.guild.name}`,
+				content: `Completed in: ${msg.channel.guild.name}`,
 				embed: embedLog.embeds[0]
 			});
 		}
 	},
+	footer: function(msg) {
+		return `Requested by ${msg.author.username}`;
+	}
 }
 
 async function userInfo(msg, user) {
