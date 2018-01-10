@@ -11,16 +11,18 @@ bot.on("ready", () => {
 			name: `${bot.commandOptions.prefix}help`
 		});
 });
+
 //Command list
 fs.readdir("./commands", (err,files) => {
 	if (err != null) {
 		console.log(err.stack);
 	} else {
 		for (var file in files) {
-			var command = require(`./commands/${files[file]}`);
-			command.register(bot, functions);
+			var curFile = files[file];
+			var command = require(`./commands/${curFile}`);
 
-			console.log(`Command '${files[file].slice(0, -3)}' has been loaded.`);
+			command.register(bot, functions);
+			console.log(`Command '${curFile.slice(0, -3)}' has been loaded.`);
 		}
 	}
 });
