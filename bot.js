@@ -1,6 +1,7 @@
 const Eris = require("eris");
-var config = require("./Partius.json");
-var fs = require("fs");
+const fs = require("fs");
+const config = require("./Partius.json");
+
 
 var bot = new Eris.CommandClient(config.token, {}, config.commandOptions);
 
