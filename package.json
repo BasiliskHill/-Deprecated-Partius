@@ -4,7 +4,7 @@
   "description": "Partius bot",
   "main": "bot.js",
   "dependencies": {
-    "eris": "github:abalabahaha/eris#dev",
+    "eris": "^0.8.3",
     "node-url-shortener": "^1.0.1",
     "pubg.js": "^2.0.0"
   },

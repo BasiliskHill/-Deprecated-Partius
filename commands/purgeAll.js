@@ -1,6 +1,6 @@
 module.exports = {
 	register: function(bot, functions) {
-		bot.commands.purge.registerSubcommand('all', async (msg) => {
+		bot.commands.purge.registerSubcommand("all", async (msg) => {
 			let messagesKilled = 0;
 
 			for (const channel of msg.channel.guild.channels.values()) {
@@ -12,8 +12,8 @@ module.exports = {
 			// Discord logging
 			const embedLog = await msg.channel.createMessage({
 				embed: {
-					title: 'Purge ALL completed.',
-					description:'Deleted a total of ' + (messagesKilled - 1) + ' message(s) from the server.',
+					title: "Purge ALL completed.",
+					description:"Deleted a total of " + (messagesKilled - 1) + " message(s) from the server.",
 					timestamp: functions.timestamp(),
 					color: 0xd50000,
 					footer: {
@@ -26,8 +26,8 @@ module.exports = {
 
 		}, {
 			guildOnly: true,
-			description: 'Purge a whole server',
-			fullDescription: 'Purges all messages < 2 weeks old from **all** channels on the server',
+			description: "Purge a whole server",
+			fullDescription: "Purges all messages < 2 weeks old from **all** channels on the server",
 			cooldown: 60000,
 			requirements: {
 				userIDs: message => [message.channel.guild.ownerID],
