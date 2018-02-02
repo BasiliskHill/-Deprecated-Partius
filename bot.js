@@ -50,4 +50,13 @@ const functions = {
 	},
 };
 
+//	Event Listeners
+bot.on("disconnect", err => {
+	console.log("Disconnected.");
+});
+
+bot.on("error", err => {
+	console.log(err.stack);
+});
+
 bot.connect();
