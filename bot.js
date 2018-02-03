@@ -1,6 +1,7 @@
 const Eris = require("eris");
 const fs = require("fs");
 const config = require("./Partius.json");
+const exec = require("child_process").exec;
 
 
 const bot = new Eris.CommandClient(config.token, {}, config.commandOptions);
@@ -30,6 +31,17 @@ fs.readdir("./commands", (err, files) => {
 });
 
 //	Event Listeners
+bot.on("messageCreate", msg => {
+	if (msg.channel.id == "409245084903800832") {
+		exec("git pull", (error, stdout, stderr) => {
+			console.log(`${stdout}`);
+			console.log(`${stderr}`);
+			if (error !== null) {
+				console.log(`exec error: ${error}`);
+			}
+		});
+	}
+});
 bot.on("disconnect", () => {
 	console.log("\nDisconnected.\n");
 });
