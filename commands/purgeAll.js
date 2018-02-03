@@ -1,6 +1,7 @@
 module.exports = {
 	register: function(bot, functions) {
 		bot.commands.mod.subcommands.purge.registerSubcommand("all", async (msg) => {
+			const date = new Date();
 			let messagesKilled = 0;
 
 			for (const channel of msg.channel.guild.channels.values()) {
@@ -14,7 +15,7 @@ module.exports = {
 				embed: {
 					title: "Purge ALL completed.",
 					description:"Deleted a total of " + (messagesKilled - 1) + " message(s) from the server.",
-					timestamp: functions.timestamp(),
+					timestamp: date.toISOString(),
 					color: 0xd50000,
 					footer: {
 						icon_url: msg.author.avatarURL,

@@ -1,6 +1,7 @@
 module.exports = {
 	register: function(bot, functions) {
 		bot.commands.mod.registerSubcommand("purge", async (msg, args) => {
+			const date = new Date();
 			const channelID = msg.channel.id;
 			const limit = parseInt(args);
 			let messagesKilled = 0;
@@ -25,7 +26,7 @@ module.exports = {
 				embed: {
 					title: "Purge completed.",
 					description:"Deleted " + (messagesKilled - 1) + " message(s) from this channel.",
-					timestamp: functions.timestamp(),
+					timestamp: date.toISOString(),
 					color: 0xd50000,
 					footer: {
 						text: functions.footer(msg),
