@@ -52,7 +52,7 @@ const functions = {
 
 //	Event Listeners
 bot.on("disconnect", () => {
-	console.log("Disconnected.");
+	console.log("\nDisconnected.\n");
 });
 
 bot.on("error", err => {
