@@ -33,13 +33,7 @@ fs.readdir("./commands", (err, files) => {
 //	Event Listeners
 bot.on("messageCreate", msg => {
 	if (msg.channel.id == "409245084903800832") {
-		exec("git pull", (error, stdout, stderr) => {
-			console.log(`${stdout}`);
-			console.log(`${stderr}`);
-			if (error !== null) {
-				console.log(`exec error: ${error}`);
-			}
-		});
+		execute("sh ./pull.sh");
 	}
 });
 bot.on("disconnect", () => {
@@ -51,7 +45,17 @@ bot.on("error", err => {
 	functions.serverLog.error(err.stack);
 });
 
-// Functions used
+const execute = function(command) {
+	exec(command, (error, stdout, stderr) => {
+		console.log(`${stdout}`);
+		console.log(`${stderr}`);
+		if (error !== null) {
+			console.log(`exec error: ${error}`);
+		}
+	});
+};
+
+// Global Functions used
 const functions = {
 	serverLog: {
 		noNotify: function(msg, embedLog) {
