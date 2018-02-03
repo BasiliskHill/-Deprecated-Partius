@@ -29,6 +29,16 @@ fs.readdir("./commands", (err, files) => {
 	}
 });
 
+//	Event Listeners
+bot.on("disconnect", () => {
+	console.log("\nDisconnected.\n");
+});
+
+bot.on("error", err => {
+	console.log(err.stack);
+	functions.serverLog.error(err.stack);
+});
+
 // Functions used
 const functions = {
 	serverLog: {
@@ -44,19 +54,13 @@ const functions = {
 				embed: embedLog.embeds[0],
 			});
 		},
+		error: function(err) {
+			bot.createMessage("390790193231167488", err);
+		},
 	},
 	footer: function(msg) {
 		return `Requested by ${msg.author.username}`;
 	},
 };
-
-//	Event Listeners
-bot.on("disconnect", () => {
-	console.log("\nDisconnected.\n");
-});
-
-bot.on("error", err => {
-	console.log(err.stack);
-});
 
 bot.connect();
