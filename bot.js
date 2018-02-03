@@ -36,6 +36,7 @@ bot.on("messageCreate", msg => {
 		execute("sh ./pull.sh");
 	}
 });
+
 bot.on("disconnect", () => {
 	console.log("\nDisconnected.\n");
 });
