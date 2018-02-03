@@ -1,6 +1,6 @@
 module.exports = {
 	register: function(bot, functions) {
-		bot.registerCommand("purge", async (msg, args) => {
+		bot.commands.mod.registerSubcommand("purge", async (msg, args) => {
 			const channelID = msg.channel.id;
 			const limit = parseInt(args);
 			let messagesKilled = 0;

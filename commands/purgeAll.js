@@ -1,6 +1,6 @@
 module.exports = {
 	register: function(bot, functions) {
-		bot.commands.purge.registerSubcommand("all", async (msg) => {
+		bot.commands.mod.subcommands.purge.registerSubcommand("all", async (msg) => {
 			let messagesKilled = 0;
 
 			for (const channel of msg.channel.guild.channels.values()) {
